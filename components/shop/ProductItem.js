@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
     height: 300,
     margin: 20,
   },
+  touchable: {
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
   imageContainer: {
     width: '100%',
     height: '60%',
@@ -28,15 +32,8 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-
-  },
-  info: {
-    height: '100%',
-    paddingHorizontal: 10,
-    paddingVertical: 10,
   },
   details: {
-    alignItems: 'center',
     height: '15%',
     padding: 10,
   },
@@ -53,6 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '25%',
+    paddingHorizontal: 10,
   },
 });
 
@@ -68,22 +66,32 @@ export default function ProductItem({
   }
 
   return (
-    <TouchableCmp onPress={onViewDetail} useForeground>
-      <View style={styles.product}>
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={{ uri: image }} />
-        </View>
-        <View style={styles.info}>
-          <View style={styles.detailes}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.price}>{price.toFixed(2)}</Text>
+    <View style={styles.product}>
+      <View style={styles.touchable}>
+        <TouchableCmp onPress={onViewDetail} useForeground>
+          <View>
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={{ uri: image }} />
+            </View>
+            <View style={styles.details}>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.price}>${price.toFixed(2)}</Text>
+            </View>
+            <View style={styles.actions}>
+              <Button
+                color={Colors.primary}
+                title="View Details"
+                onPress={onViewDetail}
+              />
+              <Button
+                color={Colors.primary}
+                title="To Cart"
+                onPress={onAddCart}
+              />
+            </View>
           </View>
-          <View style={styles.actions}>
-            <Button color={Colors.accent} title="View Details" onPress={onViewDetail} />
-            <Button color={Colors.accent} title="To Cart" onPress={onAddCart} />
-          </View>
-        </View>
+        </TouchableCmp>
       </View>
-    </TouchableCmp>
+    </View>
   );
 }
