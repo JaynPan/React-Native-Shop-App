@@ -6,7 +6,7 @@ import productsReducer from './store/reducers/products';
 import ShopNavigator from './navigation/ShopNavigator';
 
 const rootReducer = combineReducers({
-  products: productsReducer
+  products: productsReducer,
 });
 
 const store = createStore(rootReducer);
