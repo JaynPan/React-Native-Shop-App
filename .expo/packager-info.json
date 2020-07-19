@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 18137,
-  "expoServerNgrokUrl": "https://p9-u9h.anonymous.cocktail-recipes.exp.direct",
-  "packagerNgrokUrl": "https://packager.p9-u9h.anonymous.cocktail-recipes.exp.direct",
-  "ngrokPid": 18171,
+  "packagerPort": 19003,
+  "packagerPid": 41448,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }
