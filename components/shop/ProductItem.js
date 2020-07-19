@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   View, Text, Image, StyleSheet, Button,
-  TouchableOpacity,
+  TouchableOpacity, TouchableNativeFeedback, Platform,
 } from 'react-native';
 
 import Colors from '../../constants/Colors';
@@ -56,11 +56,19 @@ const styles = StyleSheet.create({
   },
 });
 
+const ANDRIOD_SUPPORT_RIPPLE_EFFECT_VERSION = 21;
+
 export default function ProductItem({
   image, title, price, onViewDetail, onAddCart,
 }) {
+  let TouchableCmp = TouchableOpacity;
+
+  if (Platform.OS === 'android' && Platform.Version >= ANDRIOD_SUPPORT_RIPPLE_EFFECT_VERSION) {
+    TouchableCmp = TouchableNativeFeedback;
+  }
+
   return (
-    <TouchableOpacity onPress={onViewDetail}>
+    <TouchableCmp onPress={onViewDetail} useForeground>
       <View style={styles.product}>
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={{ uri: image }} />
@@ -76,6 +84,6 @@ export default function ProductItem({
           </View>
         </View>
       </View>
-    </TouchableOpacity>
+    </TouchableCmp>
   );
 }
