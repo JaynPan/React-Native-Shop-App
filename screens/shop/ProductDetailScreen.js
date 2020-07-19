@@ -4,6 +4,28 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 
+const styles = StyleSheet.create({
+  image: {
+    width: '100%',
+    height: 300,
+  },
+  actions: {
+    marginVertical: 10,
+    alignItems: 'center',
+  },
+  infoBox: {
+    marginHorizontal: 20,
+  },
+  price: {
+    fontSize: 20,
+    color: '#888',
+    marginVertical: 20,
+  },
+  description: {
+    fontSize: 14,
+  },
+});
+
 export default function ProductDetailScreen({ navigation }) {
   const productId = navigation.getParam('productId');
   const selectedProduct = useSelector(
@@ -11,12 +33,22 @@ export default function ProductDetailScreen({ navigation }) {
       .find((prod) => prod.id === productId),
   );
 
-  const { title } = selectedProduct;
+  const {
+    title, imageUrl, price, description,
+  } = selectedProduct;
 
   return (
-    <View>
-      <Text>{title}</Text>
-    </View>
+    <ScrollView>
+      <Image style={styles.image} source={{ uri: imageUrl }} />
+      <View style={styles.actions}>
+        <Button title="Add to Cart" onPress={() => {}} />
+      </View>
+      <View style={styles.infoBox}>
+        <Text style={styles.price}>${price.toFixed(2)}</Text>
+        <Text>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
+      </View>
+    </ScrollView>
   );
 }
 
