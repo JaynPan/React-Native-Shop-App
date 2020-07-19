@@ -2,7 +2,9 @@ import React from 'react';
 import {
   ScrollView, View, Text, Image, StyleSheet, Button,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as cartActions from '../../store/actions/cart';
 
 const styles = StyleSheet.create({
   image: {
@@ -32,6 +34,11 @@ export default function ProductDetailScreen({ navigation }) {
     (state) => state.products.availableProducts
       .find((prod) => prod.id === productId),
   );
+  const dispatch = useDispatch();
+
+  const onAddToCart = () => {
+    dispatch(cartActions.addToCart(selectedProduct));
+  };
 
   const {
     title, imageUrl, price, description,
@@ -41,7 +48,7 @@ export default function ProductDetailScreen({ navigation }) {
     <ScrollView>
       <Image style={styles.image} source={{ uri: imageUrl }} />
       <View style={styles.actions}>
-        <Button title="Add to Cart" onPress={() => {}} />
+        <Button title="Add to Cart" onPress={onAddToCart} />
       </View>
       <View style={styles.infoBox}>
         <Text style={styles.price}>${price.toFixed(2)}</Text>
