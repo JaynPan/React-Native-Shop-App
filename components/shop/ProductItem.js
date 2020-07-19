@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   View, Text, Image, StyleSheet, Button,
+  TouchableOpacity,
 } from 'react-native';
 
 import Colors from '../../constants/Colors';
@@ -59,20 +60,22 @@ export default function ProductItem({
   image, title, price, onViewDetail, onAddCart,
 }) {
   return (
-    <View style={styles.product}>
-      <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ url: image }} />
-      </View>
-      <View style={styles.info}>
-        <View style={styles.detailes}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.price}>{price.toFixed(2)}</Text>
+    <TouchableOpacity onPress={onViewDetail}>
+      <View style={styles.product}>
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={{ uri: image }} />
         </View>
-        <View style={styles.actions}>
-          <Button color={Colors.accent} title="View Details" onPress={onViewDetail} />
-          <Button color={Colors.accent} title="To Cart" onPress={onAddCart} />
+        <View style={styles.info}>
+          <View style={styles.detailes}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.price}>{price.toFixed(2)}</Text>
+          </View>
+          <View style={styles.actions}>
+            <Button color={Colors.accent} title="View Details" onPress={onViewDetail} />
+            <Button color={Colors.accent} title="To Cart" onPress={onAddCart} />
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

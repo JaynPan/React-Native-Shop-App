@@ -4,10 +4,15 @@ import { useSelector } from 'react-redux';
 
 import ProductItem from '../../components/shop/ProductItem';
 
-const ProductsOverviewScreen = () => {
+export default function ProductsOverviewScreen({ navigation }) {
   const products = useSelector((state) => state.products.availableProducts);
 
-  const onViewDetail = () => {};
+  const onViewDetail = (item) => () => {
+    navigation.navigate('ProductDetail', {
+      productId: item.id,
+      productTitle: item.title,
+    });
+  };
 
   const onAddCart = () => {};
 
@@ -20,16 +25,14 @@ const ProductsOverviewScreen = () => {
           image={item.imageUrl}
           title={item.title}
           price={item.price}
-          onViewDetail={onViewDetail}
+          onViewDetail={onViewDetail(item)}
           onAddCart={onAddCart}
         />
       )}
     />
   );
-};
+}
 
 ProductsOverviewScreen.navigationOptions = {
   headerTitle: 'All Products',
 };
-
-export default ProductsOverviewScreen;
