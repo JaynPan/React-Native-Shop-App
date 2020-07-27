@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
     } else {
       updatedOrNewCartItem = new CartItem(1, prodPrice, prodTitle, prodPrice);
     }
-    console.log(updatedOrNewCartItem);
+
     return {
       ...state,
       items: { ...state.items, [id]: updatedOrNewCartItem },
