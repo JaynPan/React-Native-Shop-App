@@ -37,7 +37,7 @@ export default function CartItem({
         </Text>
       </View>
       <View style={styles.itemData}>
-        <Text style={styles.mainText}>{`$ ${amount}`}</Text>
+        <Text style={styles.mainText}>{`$ ${amount.toFixed(2)}`}</Text>
         <TouchableOpacity onPress={onRemove} style={styles.deleteButton}>
           <Ionicons
             name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'}
