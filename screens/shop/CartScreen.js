@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 
+import CartItem from '../../components/shop/CartItem';
 import Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
@@ -36,12 +37,12 @@ const styles = StyleSheet.create({
 export default function CartScreen() {
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
   const cartItems = useSelector((state) => {
-    const transformedCartItems = Object.keys(state.cart.items).map((item) => ({
-      productId: item.id,
-      productTitle: item.productTitle,
-      productPrice: item.productPrice,
-      quantiity: item.quantiity,
-      sum: item.sum,
+    const transformedCartItems = Object.keys(state.cart.items).map((id) => ({
+      productId: id,
+      title: state.cart.items[id].productTitle,
+      price: state.cart.items[id].productPrice,
+      quantity: state.cart.items[id].quantity,
+      sum: state.cart.items[id].sum,
     }));
 
     return transformedCartItems;
@@ -55,9 +56,18 @@ export default function CartScreen() {
         </Text>
         <Button color={Colors.accent} title="Order Now" disabled={cartItems.length === 0} />
       </View>
-      <View>
-        <Text>Cart Items Here</Text>
-      </View>
+      <FlatList
+        data={cartItems}
+        keyExtractor={(item) => item.productId}
+        renderItem={(itemData) => (
+          <CartItem
+            quantity={itemData.item.quantity}
+            title={itemData.item.title}
+            amount={itemData.item.sum}
+            onRemove={() => {}}
+          />
+        )}
+      />
     </View>
   );
 }
